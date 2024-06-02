@@ -1,6 +1,6 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { FlatList, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+// import { StatusBar } from 'expo-status-bar';
+import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { categoriesData } from './catergories.mock';
 import { taskData } from './tasks.mock';
 
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   taskText: {
     fontSize: 12,
-    fontWeight: "normal",
+    fontWeight: "bold",
   },
   profileBtn: {
     backgroundColor: "#fff",
