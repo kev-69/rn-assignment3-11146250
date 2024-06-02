@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { categoriesData } from './catergories.mock';
 
 export default function App() {
   return (
@@ -28,8 +29,26 @@ export default function App() {
           </View>
         </View>
 
-        <View>
+        <View style={styles.categoriesContainer}>
+          <Text style={styles.categoriesTitle}>Categories</Text>
           
+          <FlatList data={categoriesData} renderItem={({item}) => (
+            <View style={styles.catergoryItem}>
+              <View>
+              <Text style={styles.categoryName}>{item.name}</Text>
+              <Text style={styles.catergoryDescription}>{item.description}</Text>
+              </View>
+              <Image source={item.img} />
+            </View>
+          )} 
+            keyExtractor={(item) => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+
+        <View style={styles.taskscontainer}>
+          <Text style={styles.tasksTitle}></Text>
         </View>
       </View>
     </View>
@@ -86,5 +105,38 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     letterSpacing: 1.25,
-  }
+  },
+  categoryItem: {
+    backgroundColor: "#fff",
+    marginRight: 20,
+    padding: 20,
+    borderRadius: 10,
+    gap: 10,
+  },
+  categoryName: {
+    fontSize: 18,
+    fontWeight: "bold",
+    letterSpacing: 1.25
+  },
+  taskscontainer: {
+    gap: 20,
+  },
+  tasksTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    letterSpacing: 1.25,
+  },
+  tasksItem: {
+    backgroundColor: "#fff",
+    borderColor: "#e8d1ba",
+    borderWidth: 1,
+    marginRight: 20,
+    padding: 20,
+    borderRadius: 10,
+    width: "100%",
+    marginBottom: 20,
+    justifyContent: "center",
+    height: 150,
+    gap: 10,
+  },
 });
