@@ -2,10 +2,10 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { FlatList, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { categoriesData } from './catergories.mock';
+import { taskData } from './tasks.mock';
 
 export default function App() {
   return (
-    // <SafeAreaView>
     <View style={styles.safeArea}>
       <View style={styles.mainContainer}>
         <View style={styles.header}>
@@ -20,10 +20,13 @@ export default function App() {
         </View>
 
         <View style={styles.searchContainer}>
-          <TextInput
-            placeholder='Search'
-            style={styles.textInput}
-          />
+          <View style={styles.searchInputContainer}>
+            <TextInput
+              placeholder='Search'
+              style={styles.textInput}
+            />
+            <Image source={require("./assets/search_icon.png")} style={styles.searchIcon} />
+          </View>
           <View style={styles.filterBtn}>
             <Image source={require("./assets/bx_slider.png")} />
           </View>
@@ -33,7 +36,7 @@ export default function App() {
           <Text style={styles.categoriesTitle}>Categories</Text>
           
           <FlatList data={categoriesData} renderItem={({item}) => (
-            <View style={styles.catergoryItem}>
+            <View style={styles.categoryItem}>
               <View>
               <Text style={styles.categoryName}>{item.name}</Text>
               <Text style={styles.catergoryDescription}>{item.description}</Text>
@@ -48,11 +51,21 @@ export default function App() {
         </View>
 
         <View style={styles.taskscontainer}>
-          <Text style={styles.tasksTitle}></Text>
+          <Text style={styles.tasksTitle}>Ongoing Tasks</Text>
+          <FlatList 
+            data={taskData}
+            renderItem={({item}) => (
+              <View style={styles.tasksItem}>
+                <View>
+                  <Text style={styles.taskName}>{item.name}</Text>
+                </View>
+              </View>
+            )}
+            keyExtractor={(item) => item.id}
+          />
         </View>
       </View>
     </View>
-    // </SafeAreaView>
   );
 }
 
@@ -62,6 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f7f0e8',
     padding: 12,
     gap: 20,
+    top: 0,
   },
   header: {
     flexDirection: "row",
@@ -69,11 +83,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   helloText: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: "bold",
   },
   taskText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "normal",
   },
   profileBtn: {
@@ -86,12 +100,24 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     top: 10
   },
+  searchInputContainer: {
+    position: 'relative',
+    width: '80%',
+  },
   textInput: {
     backgroundColor: "#fff",
-    width: "80%",
+    width: "100%",
     height: 50,
     borderRadius: 10,
-    padding: 5,
+    padding: 10,
+    paddingRight: 40,
+  },
+  searchIcon: {
+    position: 'absolute',
+    right: 10,
+    top: 15,
+    width: 20,
+    height: 20,
   },
   filterBtn: {
     backgroundColor: "#f0522f",
@@ -100,31 +126,39 @@ const styles = StyleSheet.create({
   },
   categoriesContainer: {
     gap: 10,
+    top: 20,
   },
   categoriesTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     letterSpacing: 1.25,
   },
+  catergoryDescription: {
+    fontSize: 12,
+  },
   categoryItem: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FFF",
     marginRight: 20,
     padding: 20,
     borderRadius: 10,
     gap: 10,
   },
   categoryName: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
-    letterSpacing: 1.25
+    letterSpacing: 1.25,
   },
   taskscontainer: {
     gap: 20,
+    top: 30,
   },
   tasksTitle: {
     fontSize: 18,
     fontWeight: "bold",
     letterSpacing: 1.25,
+  },
+  taskName: {
+    fontSize: 16,
   },
   tasksItem: {
     backgroundColor: "#fff",
